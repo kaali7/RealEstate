@@ -1,0 +1,215 @@
+:root {
+  --paper: #f4f1ea;
+  --paper-deep: #e7e0d2;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-strong: #fffdf9;
+  --surface-2: #edf3ee;
+  --ink: #132d2a;
+  --muted: #536c66;
+  --green: #1f7d68;
+  --green-deep: #123c34;
+  --green-soft: #dfeee7;
+  --gold: #c79a48;
+  --gold-soft: #f5e9d0;
+  --line: #d3ddd8;
+  --shadow: 0 20px 45px rgba(20, 59, 53, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(198, 151, 82, 0.12), transparent 22%),
+    linear-gradient(180deg, var(--paper) 0%, #f9f5f0 100%);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+body p { color: var(--ink); }
+
+a { color: inherit; }
+
+.page {
+  width: min(1530px, calc(100% - 52px));
+  margin: 0 auto;
+  padding: 34px 0 80px;
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  padding: 8px 4px 26px;
+  border-bottom: 1px solid rgba(18, 60, 52, 0.12);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+  color: #fff;
+  box-shadow: 0 10px 18px rgba(31, 125, 104, 0.2);
+}
+
+h1 {
+  max-width: 760px;
+  margin: 20px 0 0;
+  font-size: clamp(2.6rem, 5vw, 5.8rem);
+  line-height: 0.9;
+  letter-spacing: -0.075em;
+  color: var(--green-deep);
+}
+
+.intro {
+  max-width: 420px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.diagram-shell {
+  margin-top: 34px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(18, 60, 52, 0.08);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(2px);
+}
+
+.diagram-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 22px;
+  background: linear-gradient(180deg, rgba(237, 243, 238, 0.9), rgba(255, 255, 255, 0.7));
+  border-bottom: 1px solid rgba(18, 60, 52, 0.08);
+}
+
+.diagram-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+}
+
+.diagram-head strong {
+  color: var(--green-deep);
+}
+
+.back-link {
+  color: var(--green-deep);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(31, 125, 104, 0.08);
+  transition: background 160ms ease;
+}
+
+.back-link:hover {
+  background: rgba(31, 125, 104, 0.14);
+}
+
+.diagram-wrap {
+  overflow-x: auto;
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.65), rgba(239,246,243,0.75));
+}
+
+.diagram {
+  display: block;
+  width: 100%;
+  min-width: 880px;
+  height: auto;
+  border-radius: 16px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: 18px 22px 22px;
+  background: rgba(237, 243, 238, 0.75);
+  color: var(--muted);
+  font-size: 0.82rem;
+  border-top: 1px solid rgba(18, 60, 52, 0.08);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swatch {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(19,45,42,0.06);
+}
+
+.swatch.green { background: var(--green); }
+.swatch.gold { background: var(--gold); }
+.swatch.soft { background: var(--green-soft); }
+
+.note {
+  max-width: 720px;
+  margin: 28px 4px 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.note strong { color: var(--ink); }
+
+@media (max-width: 820px) {
+  .page {
+    width: min(100% - 24px, 1530px);
+    padding-top: 24px;
+  }
+
+  .masthead {
+    display: block;
+    padding-bottom: 20px;
+  }
+
+  .intro {
+    margin-top: 18px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 12vw, 4.2rem);
+  }
+
+  .diagram-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

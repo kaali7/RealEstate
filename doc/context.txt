@@ -1,0 +1,816 @@
+GEKAYREALESTATE
+REAL-ESTATE MANAGEMENT SYSTEM
+
+
+1. INTRODUCTION
+
+1.1 Project Background
+
+GekayRealEstate is a web-based real-estate management system developed with Python
+and Django. The application allows visitors to browse property listings, inspect
+property information, learn about realtors, and contact a realtor about a property.
+Registered users can log in and review the inquiries associated with their account.
+
+Property information is stored in a structured database instead of being maintained
+only in paper records or scattered messages. Each listing contains details such as
+title, address, city, state, postal code, price, bedrooms, bathrooms, garage,
+floor area, lot size, description and property photographs. A listing is connected
+to a realtor who is responsible for the property.
+
+1.2 Problem Statement
+
+Traditional property promotion methods make it difficult for users to search
+available properties quickly and for administrators to maintain consistent
+property information. Buyers may need to contact an office repeatedly to obtain
+basic details, while property managers may have difficulty tracking inquiries,
+realtor information and listing status.
+
+The project addresses these problems by providing a central web application with
+searchable listings, property detail pages, realtor information, user accounts,
+contact inquiries and an administrative interface.
+
+1.3 Project Objectives
+
+The main objectives of GekayRealEstate are:
+
+1. To provide a clear home page for discovering featured properties.
+2. To display property listings with photographs and important property details.
+3. To allow users to search properties by keyword, city, state, bedrooms and price.
+4. To provide a detailed page for every property listing.
+5. To maintain realtor records and display realtor information.
+6. To provide registration, login and logout functionality.
+7. To allow authenticated users to view their submitted property inquiries.
+8. To record inquiries made for a property and notify the responsible office.
+9. To provide Django administration for managing application data.
+10. To use a maintainable Django project structure with separate application modules.
+
+1.4 Scope of the System
+
+The current system includes:
+
+• Public home and about pages.
+• Featured property listings on the home page.
+• A paginated browse-listings page.
+• Individual property detail pages.
+• Property search and filtering.
+• Realtor profiles and realtor information.
+• User registration, login, logout and dashboard pages.
+• Contact inquiry submission for a property.
+• Prevention of repeated inquiries for the same listing by a logged-in user.
+• Email notification when an inquiry is submitted.
+• Django admin support for data management.
+• SQLite database storage for local development.
+• Static files and uploaded property images.
+
+The current version does not implement online payments, property reservations,
+real-time chat, map integration, advanced role management or a dedicated booking
+workflow.
+
+1.5 Intended Users
+
+The system is intended for:
+
+• Visitors searching for residential properties.
+• Registered users who want to contact realtors and track inquiries.
+• Realtors whose property information is displayed by the system.
+• Administrators who maintain listings, realtors, users and inquiries.
+• Developers and students studying Django-based web application development.
+
+1.6 Project Benefits
+
+The application makes property information easier to discover and maintain. Users
+can review important information before making an inquiry, while administrators
+can manage records through Django's administration tools. Search and pagination
+reduce the effort needed to browse a large number of properties. Database storage
+also makes it possible to preserve listing and inquiry records for later review.
+
+
+2. SYSTEM STUDY
+
+2.1 Existing Real-Estate Listing Process
+
+In a manual or partially digital process, property details may be maintained in
+spreadsheets, paper files, social-media posts or separate communication channels.
+Users often have to ask for the same information repeatedly. Property photographs,
+prices, location information and contact records may not be presented consistently.
+
+2.2 Limitations of the Existing Process
+
+The existing process can result in:
+
+• Slow property discovery.
+• Inconsistent or outdated property information.
+• Difficulty comparing multiple properties.
+• Repeated manual responses to common questions.
+• Poor tracking of customer inquiries.
+• Limited access to historical records.
+• Difficulty maintaining realtor and listing relationships.
+
+2.3 Proposed GekayRealEstate System
+
+The proposed system stores realtors, listings, users and contact inquiries in a
+Django-managed relational database. Public users can browse and search published
+listings. A listing detail page displays its images, location, specifications,
+description and realtor. An authenticated user can submit an inquiry and later
+view the inquiry from the dashboard.
+
+The application is divided into focused Django applications:
+
+• pages: home and about pages.
+• listings: listing display, detail pages, pagination and search.
+• realtors: realtor model and administration support.
+• accounts: registration, authentication and user dashboard.
+• contacts: property inquiries and email notification.
+
+2.4 Advantages of the Proposed System
+
+The proposed system provides a single source of property information, faster
+search, reusable templates, structured records and an administration panel. The
+application is also extensible because Django applications, models, URLs, views
+and templates are separated according to responsibility.
+
+2.5 Feasibility Study
+
+2.5.1 Technical Feasibility
+
+The system uses Python, Django, SQLite, HTML, CSS and JavaScript. These
+technologies are widely supported and suitable for a database-driven web
+application. Django provides routing, templates, authentication, forms support,
+database access and an administration interface.
+
+2.5.2 Operational Feasibility
+
+The application follows common website navigation patterns. Visitors can browse
+properties without creating an account, while account features are protected by
+authentication. Administrators can use the familiar Django admin interface to
+maintain records.
+
+2.5.3 Economic Feasibility
+
+The application uses open-source software and can be run locally with SQLite.
+This keeps the initial cost low. For a larger deployment, the database, hosting,
+email service and media storage can be upgraded independently.
+
+
+3. REQUIREMENTS AND ANALYSIS
+
+3.1 Functional Requirements
+
+3.1.1 Home Page and Featured Listings
+
+The home page displays a selection of recently listed published properties. It
+also provides search choices for price, bedrooms and state so that users can
+begin searching from the main page.
+
+3.1.2 Property Listing Management
+
+Each listing stores a title, realtor, address, city, state, postal code,
+description, price, bedrooms, bathrooms, garage, square footage, lot size,
+publication status, listing date and photographs. Published listings are made
+available to public users.
+
+3.1.3 Property Search and Filtering
+
+The search view accepts optional query parameters. Users can filter by keywords
+in the description, exact city, exact state, maximum number of bedrooms and
+maximum price. Results are ordered by listing date.
+
+3.1.4 Property Details and Gallery
+
+The detail view displays a selected listing and its related information. The
+listing template supports a main photograph and additional property photographs.
+The detail page also provides the contact route for an inquiry.
+
+3.1.5 Realtor Information
+
+Realtor records include name, photograph, description, phone, email, MVP status
+and hire date. The about page displays realtor records and can identify MVP
+realtors separately.
+
+3.1.6 User Registration and Login
+
+Users can register with their name, username, email address and password. The
+system validates matching passwords and checks whether a username or email is
+already in use. Registered users can log in and log out.
+
+3.1.7 User Dashboard
+
+The dashboard is protected by login. It displays the authenticated user's
+property inquiries, ordered by the most recent inquiry date.
+
+3.1.8 Property Inquiry and Contact
+
+The contact view accepts the listing identifier, listing information, visitor
+name, email, phone number, message and user identifier. The inquiry is stored in
+the Contact model and the user is returned to the listing page after submission.
+
+3.1.9 Email Notification
+
+After an inquiry is saved, the system sends an email notification to the
+configured real-estate office address. During local development, email can be
+sent to the console when SMTP credentials are not configured.
+
+3.1.10 Administration
+
+Django admin provides a central interface for authorised administrators to
+manage users and application records. The project includes admin modules for
+pages, listings, realtors, accounts and contacts.
+
+3.2 Non-Functional Requirements
+
+The system should be:
+
+• Usable: pages should be understandable to first-time visitors.
+• Maintainable: application responsibilities should remain separated.
+• Responsive: templates should support common desktop and mobile layouts.
+• Reliable: database operations should preserve listing and inquiry records.
+• Secure: authentication and Django middleware should protect account actions.
+• Extensible: future booking, payment and role features should be addable.
+• Configurable: secret keys, hosts and email credentials should come from
+  environment variables where appropriate.
+
+3.3 User Roles and Permissions
+
+Visitors can view public pages, listings, realtor details and search results.
+Registered users can authenticate, submit inquiries and view their own dashboard.
+Administrators can use Django admin to manage users and application records.
+
+3.4 Software Requirements
+
+The project requires Python 3.14, Django 5.2, SQLite for local development,
+Pillow for image handling and python-dotenv for environment configuration.
+Additional project dependencies include Gunicorn, Whitenoise, autopep8, isort
+and pylint.
+
+3.5 Hardware Requirements
+
+A development machine should have a modern processor, at least 4 GB of RAM,
+sufficient storage for the virtual environment and uploaded images, and a
+network connection for installing dependencies. End users need a browser and
+network access to the deployed application.
+
+3.6 Use-Case Analysis
+
+The visitor use cases are opening the home page, browsing listings, searching
+properties, reading property details and viewing realtor information. The
+registered-user use cases are registering, logging in, submitting an inquiry,
+viewing the dashboard and logging out. The administrator use cases are signing
+into Django admin and maintaining database records.
+
+3.7 Data Flow Analysis
+
+Property data flows from the administrator into the Listing and Realtor models.
+The visitor reads published listing data through Django views and templates.
+When an authenticated user submits a contact form, the request is validated by
+the contact view, stored as a Contact record and used to send an email alert.
+The dashboard reads Contact records belonging to the current user.
+
+
+4. TECHNOLOGY AND PROJECT ARCHITECTURE
+
+4.1 Python
+
+Python is the main programming language. It is used for project configuration,
+models, views, URL routing, tests and utility logic.
+
+4.2 Django Framework
+
+Django provides the Model-View-Template architecture, URL routing, ORM,
+authentication, sessions, messages, middleware, static-file support and admin
+interface. The project is configured through djangofirst/settings.py.
+
+4.3 SQLite Database
+
+SQLite is configured as the default local database in settings.py. It stores
+users, listings, realtors, contacts and Django framework records. Migrations
+describe changes to application database structures.
+
+4.4 HTML Templates
+
+Templates are stored in the templates directory. base.html defines the common
+document structure, navigation includes, footer and static-file imports.
+Application templates extend the base layout and provide page-specific content.
+
+4.5 Bootstrap, CSS, and JavaScript
+
+Bootstrap supplies responsive layout and reusable interface components. Custom
+styles are stored under djangofirst/static/css. JavaScript and frontend
+libraries are stored under djangofirst/static/js. The interface also includes
+Font Awesome resources and Lightbox assets.
+
+4.6 Pillow and Media File Handling
+
+Pillow supports ImageField processing for realtor photographs and listing
+photographs. Uploaded files are stored under the configured media directory.
+The main listing photograph is required, while additional photographs are
+optional.
+
+4.7 Python-Dotenv and Environment Configuration
+
+The project loads environment values from a .env file. DJANGO_SECRET_KEY and
+DJANGO_ALLOWED_HOSTS are used for application configuration. Email settings can
+also be configured through EMAIL_HOST_USER and EMAIL_HOST_PASSWORD.
+
+4.8 Gunicorn and Whitenoise
+
+Gunicorn is included as a production WSGI server dependency. Whitenoise is
+included to support efficient static-file serving in deployment environments.
+The local development process uses Django's runserver command.
+
+4.9 Project Directory Structure
+
+The principal directories are:
+
+• accounts: authentication views, URLs, models and tests.
+• contacts: inquiry model, contact view, URLs and migrations.
+• djangofirst: project settings, root URLs and WSGI configuration.
+• listings: listing model, search views, URLs and migrations.
+• pages: home and about views and URLs.
+• realtors: realtor model, views and migrations.
+• templates: shared and application-specific HTML templates.
+• djangofirst/static: CSS, JavaScript, images and fonts.
+• doc: project documentation and index files.
+
+4.10 Django MVT Architecture
+
+Models define persistent data and relationships. Views receive HTTP requests,
+query models, construct context data and select templates. Templates render
+HTML for the user. URL configurations connect browser paths to views. Django
+middleware handles common request processing, sessions, authentication,
+messages and security-related headers.
+
+4.11 URL Routing Architecture
+
+The root URL configuration includes the pages application at the root path,
+listings under /listings/, accounts under /accounts/, contacts under /contacts/
+and administration under /admin/. A legacy listings.html route redirects to
+the listings path. Media files are served from the configured media location
+during development.
+
+
+5. SYSTEM DESIGN
+
+5.1 Application Modules
+
+5.1.1 Pages Module
+
+The pages module provides the home page and about page. The home view selects
+the three most recent published listings and supplies search choices. The about
+view displays all realtors and the subset marked as MVP.
+
+5.1.2 Listings Module
+
+The listings module defines the Listing model and provides the listing index,
+individual listing detail and search views. The index uses a paginator with
+three listings per page. The detail view retrieves a listing by identifier.
+
+5.1.3 Realtors Module
+
+The realtors module defines realtor records and provides the foundation for
+displaying and administering property professionals.
+
+5.1.4 Accounts Module
+
+The accounts module implements registration, login, logout and the authenticated
+dashboard. Django's built-in User model is used for authentication.
+
+5.1.5 Contacts Module
+
+The contacts module defines the Contact model and processes property inquiries.
+It checks for a previous inquiry from the logged-in user, saves new inquiries
+and sends notification email.
+
+5.2 Database Design
+
+5.2.1 Realtor Entity
+
+The Realtor entity contains name, photograph, description, phone, email,
+MVP status and hire date. A listing references a realtor through a foreign key.
+
+5.2.2 Listing Entity
+
+The Listing entity contains property identity, location, description, price,
+bedroom and bathroom counts, garage count, area values, six optional additional
+photographs plus the main photograph, publication status and listing date.
+
+5.2.3 Contact Entity
+
+The Contact entity stores the listing name and identifier, visitor name, email,
+phone, message, inquiry date and user identifier. It is used for dashboard
+history and administrative review.
+
+5.2.4 Django User Entity
+
+Authentication uses Django's built-in User entity. It stores credentials and
+basic account information such as username, email, first name and last name.
+
+5.3 Entity Relationships
+
+A Realtor can be associated with multiple Listing records. A Listing can be
+associated with multiple Contact records. A user can create multiple Contact
+records, while the dashboard filters those records by the current user's
+identifier.
+
+5.4 User Interface Design
+
+The interface uses a shared base template and reusable top bar, navigation bar,
+footer and alert partials. Listing cards show the main image, price, location,
+area, garage, bedrooms, bathrooms, realtor and listing age. Bootstrap classes
+provide grid layout and common controls.
+
+5.5 Navigation and Common Layout
+
+The navigation allows users to move between the home page, about page, listings,
+search, authentication pages and dashboard. Breadcrumbs are used on listing
+pages to help users understand their location within the application.
+
+5.6 Security and Access Control
+
+Django authentication middleware identifies logged-in users. The dashboard uses
+the login-required decorator. CSRF middleware, session middleware, password
+validators and Django's authentication functions are enabled in the project
+configuration. Secret keys, allowed hosts and email credentials are configurable
+through environment variables.
+
+5.7 Media and Static File Design
+
+Static CSS, JavaScript, image and font files are stored in the project static
+directory. Property and realtor images are media files and are referenced in
+templates through their uploaded file URLs.
+
+
+6. IMPLEMENTATION
+
+6.1 Django Project Configuration
+
+The djangofirst project contains settings.py, urls.py and wsgi.py. Installed
+applications include pages, listings, realtors, accounts, contacts and the
+standard Django applications. The templates directory is configured as a
+project-level template directory.
+
+6.2 Home and About Pages
+
+The home view orders Listing records by descending list date, keeps published
+records and limits the result to three. It passes price, bedroom and state
+choices to the home template. The about view queries realtors by hire date and
+also selects MVP realtors.
+
+6.3 Listing Display and Pagination
+
+The listings index selects published listings, creates a Django Paginator and
+returns three records per page. The template renders previous, current and next
+page controls when additional pages exist.
+
+6.4 Listing Detail View
+
+The listing detail view uses get_object_or_404 to locate the requested record.
+If the identifier does not exist, Django returns its standard not-found
+response. Otherwise the listing context is rendered by the detail template.
+
+6.5 Listing Search
+
+The search view starts with listings ordered by date and applies each supplied
+filter independently. Empty parameters do not change the result set.
+
+6.5.1 Keyword Search
+
+The keywords parameter searches the listing description without requiring
+matching letter case.
+
+6.5.2 City and State Filtering
+
+The city and state parameters use case-insensitive exact matching to identify
+properties in a selected location.
+
+6.5.3 Bedroom Filtering
+
+The bedrooms parameter returns properties with a bedroom count less than or
+equal to the requested value.
+
+6.5.4 Price Filtering
+
+The price parameter returns properties whose price is less than or equal to
+the requested maximum.
+
+6.6 Realtor Management
+
+Realtor records are represented by the Realtor model and can be managed through
+Django admin. Listings reference realtors so that the responsible professional
+can be displayed with each property.
+
+6.7 User Registration
+
+The registration view renders the registration page for non-POST requests. For
+a POST request it reads the submitted identity and password fields, validates
+matching passwords, checks duplicate username and email values, creates a user
+with Django's create_user method and redirects to login.
+
+6.8 User Login and Logout
+
+The login view authenticates a username and password. A valid user is logged
+in and redirected to the dashboard. Invalid credentials produce an error
+message and return the user to the login page. Logout is handled through a
+POST request and redirects to the home page.
+
+6.9 Authenticated User Dashboard
+
+The dashboard is protected by login_required. It retrieves Contact records
+whose user identifier matches the current user's identifier, orders them by
+contact date and renders the dashboard template.
+
+6.10 Contact Inquiry Processing
+
+The contact view reads the listing and visitor fields from the submitted form.
+For an authenticated user, it checks whether the user has already contacted
+the same listing. If a previous inquiry exists, an error message is displayed
+and the user is returned to the listing.
+
+6.11 Duplicate Inquiry Prevention
+
+The duplicate check prevents a logged-in user from repeatedly submitting an
+inquiry for the same listing. This keeps the inquiry history more useful for
+administrators and reduces repeated notifications.
+
+6.12 Email Notification Processing
+
+After saving a new Contact record, the contact view sends a notification using
+Django's send_mail function. Local development uses the console email backend
+when SMTP credentials are not supplied.
+
+6.13 Django Admin Configuration
+
+Each application includes an admin module so that model records can be exposed
+through Django administration. The admin interface is intended for authorised
+data maintenance rather than general public browsing.
+
+6.14 Environment Variables and Configuration
+
+The project reads the secret key and allowed hosts from environment variables.
+Email host credentials are also externalised. This avoids placing deployment
+secrets directly in application source code.
+
+6.15 Database Migrations
+
+Migration files are maintained for listings, realtors and contacts. The
+migrate command applies these definitions to the SQLite database. New model
+changes should be followed by makemigrations and migrate.
+
+
+7. TESTING
+
+7.1 Testing Strategy
+
+Testing should cover models, views, URL routes, authentication, search filters,
+templates, database migrations, contact submission and administrator workflows.
+Both successful and invalid user actions should be checked.
+
+7.2 Unit Testing
+
+Application test modules are present in accounts, listings, contacts and pages.
+Unit tests should verify that individual views return the expected status,
+template and context data.
+
+7.3 Authentication Test Cases
+
+Authentication testing includes successful registration, duplicate username,
+duplicate email, mismatched passwords, valid login, invalid login, logout and
+access to the protected dashboard.
+
+7.4 Listing Test Cases
+
+Listing tests should verify that published listings are displayed, unpublished
+listings are excluded from public pages, a valid listing opens its detail page,
+and an invalid identifier returns a not-found response.
+
+7.5 Search and Filter Test Cases
+
+Search tests should verify keyword matching, exact city and state filtering,
+bedroom maximum filtering, price maximum filtering and combinations of filters.
+An empty search should return the normal listing set.
+
+7.6 Contact Inquiry Test Cases
+
+Contact tests should verify that valid form data creates a Contact record,
+the user receives a success message, the visitor returns to the listing, and
+the email notification is requested.
+
+7.7 Access Control Test Cases
+
+An unauthenticated visitor should be redirected when attempting to access the
+dashboard. An authenticated user should see only the inquiries associated with
+that user in the dashboard.
+
+7.8 Template and User Interface Testing
+
+Templates should be checked for correct navigation links, image rendering,
+breadcrumb paths, pagination controls, validation messages and responsive
+Bootstrap layout.
+
+7.9 Database and Migration Testing
+
+Migration testing should confirm that a clean database can be created and that
+the Realtor, Listing, Contact and authentication records can be stored and
+retrieved correctly.
+
+7.10 Test Results
+
+The project should be validated with Django's test runner and the existing
+Python quality tools listed in requirements.txt. Manual browser testing should
+also be performed for the main visitor, registered-user and administrator
+workflows.
+
+
+8. USER INTERFACE AND SYSTEM RESULTS
+
+8.1 Home Page
+
+The home page presents the GekayRealEstate identity, navigation, a property
+search area and a limited set of recent published listings. Each listing card
+provides a route to more information.
+
+8.2 About Page and Realtor Profiles
+
+The about page presents realtor information, including realtor photographs,
+descriptions, contact information and the MVP realtor grouping.
+
+8.3 Browse Listings Page
+
+The browse page presents published properties in a responsive card grid. Cards
+show the main image, price, location and important property specifications.
+Pagination allows users to move between result pages.
+
+8.4 Search Results Page
+
+The search page returns listings based on the submitted search criteria and
+preserves the submitted values so that users can understand the active search.
+
+8.5 Listing Details Page
+
+The detail page provides the complete property description, location, pricing,
+measurements, photographs and realtor information. It is also the starting point
+for contacting the realtor.
+
+8.6 Registration Page
+
+The registration page collects first name, last name, username, email and
+password confirmation. Error and success messages are displayed through the
+shared alerts partial.
+
+8.7 Login Page
+
+The login page accepts username and password values and provides feedback for
+successful or unsuccessful authentication.
+
+8.8 User Dashboard
+
+The dashboard displays the authenticated user's inquiry history. This gives
+users a place to review contact requests they have submitted.
+
+8.9 Contact Inquiry Form
+
+The contact form collects visitor contact information and a message connected
+to a specific listing. Successful submission stores the inquiry and provides
+confirmation feedback.
+
+8.10 Django Administration Panel
+
+The administration panel provides authorised administrators with tools to
+create, update, inspect and remove managed records.
+
+8.11 Responsive Layout
+
+The project uses Bootstrap grid classes and responsive navigation patterns.
+Custom CSS extends the visual design, while static JavaScript supports
+interactive frontend components and image presentation.
+
+
+9. DEPLOYMENT AND MAINTENANCE
+
+9.1 Local Windows Setup
+
+The README instructs developers to install Python 3.14, create a virtual
+environment, install requirements and open a PowerShell session in the project
+directory.
+
+9.2 Virtual Environment Setup
+
+The recommended commands are:
+
+    py -3.14 -m venv venv
+    .\venv\Scripts\Activate.ps1
+
+9.3 Dependency Installation
+
+Dependencies are installed from requirements.txt:
+
+    python -m pip install -r requirements.txt
+
+9.4 Environment File Configuration
+
+A local .env file should define a development secret key and allowed hosts:
+
+    DJANGO_SECRET_KEY=replace-with-a-local-secret
+    DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
+
+SMTP values can be added when external email delivery is required.
+
+9.5 Database Migration
+
+The database is prepared with:
+
+    python manage.py migrate
+
+When models change, developers should create and apply migrations using Django's
+standard makemigrations and migrate commands.
+
+9.6 Administrator Account Setup
+
+An administrator account can be created with:
+
+    python manage.py createsuperuser
+
+The administrator can then open the /admin/ route after starting the server.
+
+9.7 Running the Development Server
+
+The local server can be started with:
+
+    python manage.py runserver
+
+The application is then available at http://127.0.0.1:8000/. The project also
+provides run.bat for preparing, validating, migrating, testing and starting the
+application through a Windows workflow.
+
+9.8 Production Deployment Considerations
+
+Production deployment should use a strong secret key, explicit allowed hosts,
+DEBUG disabled, a production database, secure email credentials, HTTPS,
+proper media storage, static-file collection and a production WSGI server such
+as Gunicorn.
+
+9.9 Backup and Maintenance
+
+The database and uploaded media should be backed up regularly. Dependencies
+should be reviewed and updated carefully. Migrations, automated tests, logs,
+email configuration and static assets should be checked after each deployment.
+
+
+10. CONCLUSION AND FUTURE SCOPE
+
+10.1 Conclusion
+
+GekayRealEstate provides a practical foundation for managing and presenting
+property listings online. The Django architecture separates property data,
+realtor data, authentication, inquiries, templates and project configuration.
+Users receive a convenient browsing and inquiry experience, while administrators
+receive structured data management through Django admin.
+
+10.2 Current System Limitations
+
+The current implementation uses SQLite for local development and does not
+include a complete booking or payment workflow. User roles beyond standard
+authentication and administration are not yet modelled. Search is based on
+the available fields and does not include maps, geospatial distance or advanced
+saved-search functionality.
+
+10.3 Future Enhancements
+
+10.3.1 Advanced User Roles
+
+Separate buyer, realtor, manager and administrator permissions can be introduced
+with role-based access control.
+
+10.3.2 Online Booking and Payment
+
+Users could schedule property visits, reserve properties and complete payments
+through a secure payment provider.
+
+10.3.3 Saved and Favourite Listings
+
+Users could save properties, compare listings and receive alerts for changes.
+
+10.3.4 Advanced Property Search
+
+The search system could support property type, minimum and maximum values,
+amenities, location radius and map-based search.
+
+10.3.5 Real-Time Notifications
+
+Email, SMS or in-app notifications could inform users about inquiry responses,
+new listings and appointment changes.
+
+10.3.6 Cloud Database and Hosting
+
+For larger usage, SQLite could be replaced by PostgreSQL, uploaded images could
+use cloud storage, and the application could be deployed with a managed
+database, HTTPS and continuous deployment.
+
+
+REFERENCES
+
+1. Django Documentation, https://docs.djangoproject.com/
+2. Python Documentation, https://docs.python.org/
+3. Bootstrap Documentation, https://getbootstrap.com/docs/
+4. Pillow Documentation, https://pillow.readthedocs.io/
+5. GekayRealEstate project README.md
+6. GekayRealEstate project source code and migration files

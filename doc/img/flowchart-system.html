@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Architecture | GekayRealEstate</title>
+  <link rel="stylesheet" href="flowchart.css">
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">G</span> GEKAYREALSTATE</a>
+        <h1>How a property becomes an experience.</h1>
+      </div>
+      <p class="intro">The Django system connects public discovery, structured property data, account actions, and administrator control.</p>
+    </header>
+
+    <section class="diagram-shell" aria-labelledby="diagram-title">
+      <div class="diagram-head">
+        <p id="diagram-title"><strong>System architecture</strong> · request, data, and response flow</p>
+        <a class="back-link" href="index.html">All diagrams ↗</a>
+      </div>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 1240 720" role="img" aria-labelledby="system-title system-desc">
+          <title id="system-title">GekayRealEstate system architecture flow</title>
+          <desc id="system-desc">A flow from visitor request through Django URLs, views, models and templates, branching to inquiry email and admin.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#20866b"/>
+            </marker>
+          </defs>
+          <rect x="0" y="0" width="1240" height="720" rx="14" fill="#fbfcfa"/>
+          <rect x="26" y="24" width="1188" height="190" rx="14" fill="#eef4f0"/>
+          <rect x="26" y="238" width="1188" height="204" rx="14" fill="#f5f7f3"/>
+          <rect x="26" y="466" width="1188" height="230" rx="14" fill="#eef4f0"/>
+          <text x="52" y="58" fill="#587069" font-size="15" font-weight="700" letter-spacing="2">REQUEST</text>
+          <text x="52" y="272" fill="#587069" font-size="15" font-weight="700" letter-spacing="2">DJANGO APPLICATION</text>
+          <text x="52" y="500" fill="#587069" font-size="15" font-weight="700" letter-spacing="2">DATA &amp; OUTCOMES</text>
+
+          <g stroke="#20866b" stroke-width="3" fill="none" marker-end="url(#arrow)">
+            <path d="M244 142 H326"/>
+            <path d="M506 142 H588"/>
+            <path d="M768 142 H850"/>
+            <path d="M940 205 V292"/>
+            <path d="M850 340 H768"/>
+            <path d="M588 340 H506"/>
+            <path d="M416 390 V520"/>
+            <path d="M678 390 V520"/>
+            <path d="M940 390 V520"/>
+            <path d="M1030 575 H1110"/>
+          </g>
+
+          <g font-family="Arial, Helvetica, sans-serif">
+            <g>
+              <rect x="74" y="92" width="170" height="100" rx="12" fill="#155443"/>
+              <text x="98" y="126" fill="#fff" font-size="14" font-weight="700">VISITOR</text>
+              <text x="98" y="153" fill="#d7e9e1" font-size="14">Browse or search</text>
+              <text x="98" y="175" fill="#d7e9e1" font-size="14">a property</text>
+            </g>
+            <g>
+              <rect x="326" y="92" width="180" height="100" rx="12" fill="#20866b"/>
+              <text x="350" y="126" fill="#fff" font-size="14" font-weight="700">URL ROUTES</text>
+              <text x="350" y="153" fill="#eaf7f1" font-size="14">pages / listings /</text>
+              <text x="350" y="175" fill="#eaf7f1" font-size="14">accounts / contacts</text>
+            </g>
+            <g>
+              <rect x="588" y="92" width="180" height="100" rx="12" fill="#20866b"/>
+              <text x="612" y="126" fill="#fff" font-size="14" font-weight="700">VIEWS</text>
+              <text x="612" y="153" fill="#eaf7f1" font-size="14">Validate request</text>
+              <text x="612" y="175" fill="#eaf7f1" font-size="14">build context</text>
+            </g>
+            <g>
+              <rect x="850" y="92" width="180" height="100" rx="12" fill="#155443"/>
+              <text x="874" y="126" fill="#fff" font-size="14" font-weight="700">TEMPLATES</text>
+              <text x="874" y="153" fill="#d7e9e1" font-size="14">HTML response</text>
+              <text x="874" y="175" fill="#d7e9e1" font-size="14">to the browser</text>
+            </g>
+
+            <g>
+              <rect x="678" y="292" width="180" height="96" rx="12" fill="#fff" stroke="#20866b" stroke-width="2"/>
+              <text x="702" y="325" fill="#155443" font-size="14" font-weight="700">LISTINGS APP</text>
+              <text x="702" y="351" fill="#587069" font-size="14">Search, detail,</text>
+              <text x="702" y="373" fill="#587069" font-size="14">pagination</text>
+            </g>
+            <g>
+              <rect x="940" y="292" width="180" height="96" rx="12" fill="#fff" stroke="#20866b" stroke-width="2"/>
+              <text x="964" y="325" fill="#155443" font-size="14" font-weight="700">ACCOUNTS APP</text>
+              <text x="964" y="351" fill="#587069" font-size="14">Register, login,</text>
+              <text x="964" y="373" fill="#587069" font-size="14">dashboard</text>
+            </g>
+            <g>
+              <rect x="416" y="292" width="180" height="96" rx="12" fill="#fff" stroke="#20866b" stroke-width="2"/>
+              <text x="440" y="325" fill="#155443" font-size="14" font-weight="700">CONTACTS APP</text>
+              <text x="440" y="351" fill="#587069" font-size="14">Inquiry validation</text>
+              <text x="440" y="373" fill="#587069" font-size="14">and notification</text>
+            </g>
+
+            <g>
+              <rect x="326" y="520" width="180" height="100" rx="12" fill="#d7e9e1"/>
+              <text x="350" y="554" fill="#155443" font-size="14" font-weight="700">SQLITE DATABASE</text>
+              <text x="350" y="581" fill="#587069" font-size="14">Users, listings,</text>
+              <text x="350" y="603" fill="#587069" font-size="14">realtors, contacts</text>
+            </g>
+            <g>
+              <rect x="588" y="520" width="180" height="100" rx="12" fill="#d7e9e1"/>
+              <text x="612" y="554" fill="#155443" font-size="14" font-weight="700">EMAIL BACKEND</text>
+              <text x="612" y="581" fill="#587069" font-size="14">Office notification</text>
+              <text x="612" y="603" fill="#587069" font-size="14">or local console</text>
+            </g>
+            <g>
+              <rect x="850" y="520" width="180" height="100" rx="12" fill="#d7e9e1"/>
+              <text x="874" y="554" fill="#155443" font-size="14" font-weight="700">USER DASHBOARD</text>
+              <text x="874" y="581" fill="#587069" font-size="14">Own inquiry</text>
+              <text x="874" y="603" fill="#587069" font-size="14">history</text>
+            </g>
+            <g>
+              <rect x="1110" y="520" width="82" height="100" rx="12" fill="#c8983e"/>
+              <text x="1127" y="554" fill="#fff" font-size="14" font-weight="700">ADMIN</text>
+              <text x="1127" y="581" fill="#fff" font-size="13">Manage</text>
+              <text x="1127" y="603" fill="#fff" font-size="13">records</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch green"></i> request and application flow</span>
+        <span><i class="swatch soft"></i> persisted data and outcomes</span>
+        <span><i class="swatch gold"></i> administrator control</span>
+      </div>
+    </section>
+    <p class="note"><strong>Reading the graph:</strong> follow the green arrows from a visitor request through routing and views. The lower band shows where the system stores information and where the result is delivered.</p>
+  </main>
+</body>
+</html>

@@ -1,155 +1,90 @@
-{% extends "base.html" %}{% block content %}
-  <!-- Showcase sample -->
-  <section id="showcase">
-    <div class="container text-center">
-      <div class="home-search p-5">
-        <div class="overlay p-5">
-          <h1 class="display-4 mb-4">
-            Property Searching Just Got So Easy
-          </h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
-            voluptatum tempore! Consectetur, id commodi!</p>
-          <div class="search">
-            <form action="{% url 'search' %}">
-              <!-- Form Row 1 -->
-              <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">City</label>
-                  <input type="text" name="city" class="form-control" placeholder="City">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">State</label>
-                  <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">State (All)</option>
-                    {% for key,value in state_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-
-
-                  </select>
-                </div>
-              </div>
-              <!-- Form Row 2 -->
-              <div class="form-row">
-                <div class="col-md-6 mb-3">
-                  <label class="sr-only">Bedrooms</label>
-                  <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
-                    {% for key,value in bedroom_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">Max Price (Any)</option>
-                    {% for key,value in price_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
-            </form>
-          </div>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<main class="page-shell">
+  <section class="split-home">
+    <div class="home-copy">
+      <div class="home-copy-inner">
+        <p class="eyebrow">Property search, made human</p>
+        <h1>Find your next home.</h1>
+        <p class="lead">Browse well-presented homes, compare the details that matter, and contact a local realtor when a place feels right.</p>
+        <div class="home-actions">
+          <a class="btn btn-primary" href="{% url 'listings' %}">Browse homes</a>
+          <a class="btn btn-outline-primary" href="{% url 'about' %}">How we work</a>
         </div>
       </div>
     </div>
+    <div class="home-photo">
+      <img src="{% static 'img/showcase.jpg' %}" alt="Architecture and light in a modern property">
+      <div class="photo-caption">A clearer way to look for home.</div>
+    </div>
   </section>
 
-<!--Alert-->
-{% include 'partials/_alerts.html' %}
-      <!-- Listings -->
-      <section id="listings" class="py-5">
-        <div class="container">
-          <h3 class="text-center mb-3">Latest Listings</h3>
-          <div class="row">
-            {% if listings %}
-              {% for listing in listings %}
-                <!-- Listing 1 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card listing-preview">
-                  <img class="card-img-top" src="{{listing.photo_main.url}}" alt="">
-                  <div class="card-img-overlay">
-                    <h2>
-                      <span class="badge badge-secondary text-white">₹{{listing.price}}</span>
-                    </h2>
-                  </div>
-                  <div class="card-body">
-                    <div class="listing-heading text-center">
-                      <h4 class="text-primary">{{listing.title}}</h4>
-                      <p>
-                        <i class="fas fa-map-marker text-secondary"></i> {{listing.city}} {{listing.state}}, {{listing.zipcode}}</p>
-                    </div>
-                    <hr>
-                    <div class="row py-2 text-secondary">
-                      <div class="col-6">
-                        <i class="fas fa-th-large"></i> Sqft: {{listing.sqft}}</div>
-                      <div class="col-6">
-                        <i class="fas fa-car"></i> Garage: {{listing.garage}}</div>
-                    </div>
-                    <div class="row py-2 text-secondary">
-                      <div class="col-6">
-                        <i class="fas fa-bed"></i> Bedrooms: {{listing.bedrooms}}</div>
-                      <div class="col-6">
-                        <i class="fas fa-bath"></i> Bathrooms: {{listing.bathrooms}}</div>
-                    </div>
-                    <hr>
-                    <div class="row py-2 text-secondary">
-                      <div class="col-6">
-                        <i class="fas fa-user"></i> {{listing.realtor}}</div>
-                    </div>
-                    <div class="row text-secondary pb-2">
-                      <div class="col-6">
-                        <i class="fas fa-clock"></i> {{listing.list_data | timesince }}</div>
-                    </div>
-                    <hr>
-                    <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-            {% else %}
-              <div class="col-md-12">
-                <p>No listing Available</p>
-              </div>
-            {% endif %}
+  <section class="search-panel">
+    <div class="container">
+      <h2>Start with what matters.</h2>
+      <p>Search by place, size, or the feeling you are looking for.</p>
+      <form class="search-form" action="{% url 'search' %}">
+        <input class="form-control" type="text" name="keywords" placeholder="Keywords">
+        <input class="form-control" type="text" name="city" placeholder="City">
+        <select name="bedrooms" class="form-control">
+          <option value="">Bedrooms</option>
+          {% for key,value in bedroom_choices.items %}<option value="{{ key }}">{{ value }}</option>{% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </section>
 
-          </div>
+  <section class="section-block">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">A considered shortlist</p>
+          <h2>Homes worth a closer look.</h2>
         </div>
-      </section>
+        <p>Every listing gives you the essentials up front, so your next step is based on something real.</p>
+      </div>
+      <div class="listing-grid">
+        {% for listing in listings %}
+        <article class="listing-card">
+          <a href="{% url 'listing' listing.id %}">
+            <div class="listing-card-image">
+              <img src="{{ listing.photo_main.url }}" alt="{{ listing.title }}">
+              <span class="listing-price">₹{{ listing.price }}</span>
+            </div>
+          </a>
+          <div class="listing-card-body">
+            <h3>{{ listing.title }}</h3>
+            <p class="listing-location">{{ listing.city }}, {{ listing.state }} · {{ listing.zipcode }}</p>
+            <div class="listing-meta">
+              <span>{{ listing.bedrooms }} beds</span>
+              <span>{{ listing.bathrooms }} baths</span>
+              <span>{{ listing.sqft }} sq ft</span>
+            </div>
+            <a class="btn btn-outline-primary" href="{% url 'listing' listing.id %}">View property</a>
+          </div>
+        </article>
+        {% empty %}
+          <p>No properties are available yet.</p>
+        {% endfor %}
+      </div>
+      <div class="home-actions"><a class="btn btn-secondary" href="{% url 'listings' %}">See all homes</a></div>
+    </div>
+  </section>
 
-      <section id="services" class="py-5 bg-secondary text-white">
-        <div class="container">
-          <div class="row text-center">
-            <div class="col-md-4">
-              <i class="fas fa-comment fa-4x mr-4"></i>
-              <hr>
-              <h3>Consulting Service</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-                hic dignissimos ratione ea quae.</p>
-            </div>
-            <div class="col-md-4">
-              <i class="fas fa-home fa-4x mr-4"></i>
-              <hr>
-              <h3>Propery Management</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-                hic dignissimos ratione ea quae.</p>
-            </div>
-            <div class="col-md-4">
-              <i class="fas fa-suitcase fa-4x mr-4"></i>
-              <hr>
-              <h3>Renting & Selling</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-                hic dignissimos ratione ea quae.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+  <section class="service-band">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">The Gekay approach</p><h2>Less noise. Better decisions.</h2></div>
+        <p>We keep the search practical, local, and focused on the details that help you move forward.</p>
+      </div>
+      <div class="service-list">
+        <div class="service-item"><h3>Search clearly</h3><p>Useful filters and honest property details help you narrow the field.</p></div>
+        <div class="service-item"><h3>Compare calmly</h3><p>See the space, location, and price together before you make contact.</p></div>
+        <div class="service-item"><h3>Ask directly</h3><p>Send an inquiry to the realtor attached to the property you like.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
 {% endblock %}

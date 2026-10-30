@@ -1,0 +1,105 @@
+import shutil
+from pathlib import Path
+
+from django.conf import settings
+from django.core.management.base import BaseCommand
+
+from listings.models import Listing
+from realtors.models import Realtor
+
+
+class Command(BaseCommand):
+    help = 'Create repeatable demo realtors and property listings.'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--count',
+            type=int,
+            default=100,
+            help='Number of listings to create (default: 100).',
+        )
+
+    def handle(self, *args, **options):
+        count = options['count']
+        if count < 1:
+            self.stderr.write('The listing count must be at least 1.')
+            return
+
+        image_names = ('building.jpg', 'about.jpg', 'showcase.jpg')
+        media_image_names = []
+        media_image_dir = Path(settings.MEDIA_ROOT) / 'photos'
+        media_image_dir.mkdir(parents=True, exist_ok=True)
+        for image_name in image_names:
+            source_image = (
+                Path(settings.BASE_DIR)
+                / 'djangofirst'
+                / 'static'
+                / 'img'
+                / image_name
+            )
+            media_image = media_image_dir / f'demo-{image_name}'
+            if source_image.exists() and not media_image.exists():
+                shutil.copyfile(source_image, media_image)
+            if media_image.exists():
+                media_image_names.append(f'photos/demo-{image_name}')
+
+        if not media_image_names:
+            self.stderr.write('No demo property images were found.')
+            return
+
+        realtors = []
+        for index in range(1, min(10, count) + 1):
+            realtor, _ = Realtor.objects.get_or_create(
+                email=f'demo.realtor{index}@example.com',
+                defaults={
+                    'name': f'Demo Realtor {index}',
+                    'photo': media_image_names[0],
+                    'description': 'Demo realtor for local testing.',
+                    'phone': f'+91-90000000{index:02d}',
+                    'is_mvp': index <= 3,
+                },
+            )
+            if not realtor.photo:
+                realtor.photo = media_image_names[0]
+                realtor.save(update_fields=['photo'])
+            realtors.append(realtor)
+
+        created = 0
+        for index in range(1, count + 1):
+            listing, was_created = Listing.objects.get_or_create(
+                title=f'Demo Property {index:03d}',
+                defaults={
+                    'realtor': realtors[(index - 1) % len(realtors)],
+                    'address': f'{index} Demo Avenue',
+                    'city': ['Mumbai', 'Pune', 'Thane', 'Nashik'][index % 4],
+                    'state': 'Maharashtra',
+                    'zipcode': f'{400000 + index}',
+                    'description': (
+                        'A comfortable demo property for testing search, '
+                        'pagination, and inquiry workflows.'
+                    ),
+                    'price': 5000000 + (index * 125000),
+                    'bedrooms': 2 + (index % 4),
+                    'bathrooms': 1.5 + (index % 3) * 0.5,
+                    'garage': index % 3,
+                    'sqft': 900 + (index * 25),
+                    'lot_size': 1200 + (index * 10),
+                    'photo_main': media_image_names[(index - 1) % len(media_image_names)],
+                    'is_Published': True,
+                },
+            )
+            if not was_created:
+                listing.photo_main = media_image_names[
+                    (index - 1) % len(media_image_names)
+                ]
+                listing.is_Published = True
+                listing.save(update_fields=['photo_main', 'is_Published'])
+            created += int(was_created)
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f'Demo data ready: {Realtor.objects.count()} realtors, '
+                f'{Listing.objects.count()} listings '
+                f'({created} new listings).'
+            )
+        )

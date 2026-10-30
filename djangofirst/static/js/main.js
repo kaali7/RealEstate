@@ -1,7 +1,21 @@
 const date = new Date();
-document.querySelector('.year').innerHTML = date.getFullYear();
+const year = document.querySelector('.year');
+if (year) {
+    year.innerHTML = date.getFullYear();
+}
 
-setTimeout(function() {
-    $('#message').fadeOut('slow');
+const navToggle = document.querySelector('[data-nav-toggle]');
+const navMenu = document.querySelector('[data-nav-menu]');
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function() {
+        const isOpen = navMenu.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen);
+    });
+}
 
-},3000);
+const message = document.querySelector('#message');
+if (message && window.jQuery) {
+    setTimeout(function() {
+        $('#message').fadeOut('slow');
+    }, 3000);
+}

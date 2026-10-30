@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Journey | GekayRealEstate</title>
+  <link rel="stylesheet" href="flowchart.css">
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">G</span> GEKAYREALSTATE</a>
+        <h1>From curiosity to contact.</h1>
+      </div>
+      <p class="intro">A user can explore without an account, then authenticate only when they are ready to send and track a property inquiry.</p>
+    </header>
+    <section class="diagram-shell" aria-labelledby="diagram-title">
+      <div class="diagram-head">
+        <p id="diagram-title"><strong>User journey</strong> · discovery to follow-up</p>
+        <a class="back-link" href="index.html">All diagrams ↗</a>
+      </div>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 1240 540" role="img" aria-labelledby="journey-title journey-desc">
+          <title id="journey-title">GekayRealEstate user journey</title>
+          <desc id="journey-desc">Seven stages from the home page to the user's inquiry dashboard.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#20866b"/>
+            </marker>
+          </defs>
+          <rect x="0" y="0" width="1240" height="540" rx="14" fill="#fbfcfa"/>
+          <path d="M145 260 H1095" stroke="#cbdcd4" stroke-width="8" stroke-linecap="round"/>
+          <path d="M145 260 H1095" stroke="#20866b" stroke-width="3" stroke-dasharray="2 16" stroke-linecap="round"/>
+          <g stroke="#20866b" stroke-width="3" fill="none" marker-end="url(#arrow)">
+            <path d="M252 260 H310"/><path d="M422 260 H480"/><path d="M592 260 H650"/>
+            <path d="M762 260 H820"/><path d="M932 260 H990"/>
+          </g>
+          <g font-family="Arial, Helvetica, sans-serif">
+            <g transform="translate(48 178)">
+              <circle cx="97" cy="82" r="72" fill="#155443"/>
+              <text x="97" y="75" fill="#fff" text-anchor="middle" font-size="15" font-weight="700">HOME</text>
+              <text x="97" y="99" fill="#d7e9e1" text-anchor="middle" font-size="13">discover</text>
+            </g>
+            <g transform="translate(300 178)">
+              <circle cx="97" cy="82" r="72" fill="#20866b"/>
+              <text x="97" y="75" fill="#fff" text-anchor="middle" font-size="15" font-weight="700">SEARCH</text>
+              <text x="97" y="99" fill="#eaf7f1" text-anchor="middle" font-size="13">filter</text>
+            </g>
+            <g transform="translate(470 178)">
+              <circle cx="97" cy="82" r="72" fill="#20866b"/>
+              <text x="97" y="75" fill="#fff" text-anchor="middle" font-size="15" font-weight="700">LISTING</text>
+              <text x="97" y="99" fill="#eaf7f1" text-anchor="middle" font-size="13">compare</text>
+            </g>
+            <g transform="translate(640 178)">
+              <circle cx="97" cy="82" r="72" fill="#20866b"/>
+              <text x="97" y="75" fill="#fff" text-anchor="middle" font-size="15" font-weight="700">DETAIL</text>
+              <text x="97" y="99" fill="#eaf7f1" text-anchor="middle" font-size="13">inspect</text>
+            </g>
+            <g transform="translate(810 178)">
+              <circle cx="97" cy="82" r="72" fill="#20866b"/>
+              <text x="97" y="75" fill="#fff" text-anchor="middle" font-size="15" font-weight="700">ACCOUNT</text>
+              <text x="97" y="99" fill="#eaf7f1" text-anchor="middle" font-size="13">sign in</text>
+            </g>
+            <g transform="translate(980 178)">
+              <circle cx="97" cy="82" r="72" fill="#c8983e"/>
+              <text x="97" y="75" fill="#fff" text-anchor="middle" font-size="15" font-weight="700">INQUIRY</text>
+              <text x="97" y="99" fill="#fff" text-anchor="middle" font-size="13">contact</text>
+            </g>
+            <g>
+              <rect x="465" y="400" width="310" height="70" rx="12" fill="#d7e9e1"/>
+              <text x="620" y="430" fill="#155443" text-anchor="middle" font-size="15" font-weight="700">DASHBOARD</text>
+              <text x="620" y="452" fill="#587069" text-anchor="middle" font-size="13">review inquiry history</text>
+              <path d="M1077 334 V435 H775" stroke="#c8983e" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch green"></i> public browsing and account steps</span>
+        <span><i class="swatch gold"></i> high-intent inquiry action</span>
+        <span><i class="swatch soft"></i> retained user outcome</span>
+      </div>
+    </section>
+    <p class="note"><strong>Design intention:</strong> authentication appears near the point of action, not at the beginning, so public discovery remains open to every visitor.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Operations | GekayRealEstate</title>
+  <link rel="stylesheet" href="flowchart.css">
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">G</span> GEKAYREALSTATE</a>
+        <h1>One control room for the market.</h1>
+      </div>
+      <p class="intro">Django admin is the operational layer: it keeps property, realtor, account, and inquiry records aligned.</p>
+    </header>
+    <section class="diagram-shell" aria-labelledby="diagram-title">
+      <div class="diagram-head">
+        <p id="diagram-title"><strong>Admin operations</strong> · maintain, publish, review</p>
+        <a class="back-link" href="index.html">All diagrams ↗</a>
+      </div>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 1240 620" role="img" aria-labelledby="admin-title admin-desc">
+          <title id="admin-title">GekayRealEstate admin operations flow</title>
+          <desc id="admin-desc">A control loop from admin login through record management, publishing, inquiry review and database updates.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#20866b"/>
+            </marker>
+          </defs>
+          <rect x="0" y="0" width="1240" height="620" rx="14" fill="#fbfcfa"/>
+          <rect x="42" y="42" width="1156" height="520" rx="16" fill="#eef4f0"/>
+          <path d="M235 212 H1000" stroke="#cbdcd4" stroke-width="8" stroke-linecap="round"/>
+          <g stroke="#20866b" stroke-width="3" fill="none" marker-end="url(#arrow)">
+            <path d="M235 212 H325"/><path d="M475 212 H565"/><path d="M715 212 H805"/><path d="M955 212 H1045"/>
+            <path d="M1120 285 V420 H620"/>
+            <path d="M620 420 H410"/>
+          </g>
+          <g font-family="Arial, Helvetica, sans-serif">
+            <g transform="translate(90 132)">
+              <rect width="145" height="160" rx="14" fill="#155443"/>
+              <text x="24" y="44" fill="#fff" font-size="14" font-weight="700">ADMIN LOGIN</text>
+              <text x="24" y="82" fill="#d7e9e1" font-size="13">secure access</text>
+              <text x="24" y="105" fill="#d7e9e1" font-size="13">to Django admin</text>
+            </g>
+            <g transform="translate(325 132)">
+              <rect width="150" height="160" rx="14" fill="#fff" stroke="#20866b" stroke-width="2"/>
+              <text x="24" y="44" fill="#155443" font-size="14" font-weight="700">REALTORS</text>
+              <text x="24" y="82" fill="#587069" font-size="13">profiles</text>
+              <text x="24" y="105" fill="#587069" font-size="13">photos and status</text>
+            </g>
+            <g transform="translate(565 132)">
+              <rect width="150" height="160" rx="14" fill="#fff" stroke="#20866b" stroke-width="2"/>
+              <text x="24" y="44" fill="#155443" font-size="14" font-weight="700">LISTINGS</text>
+              <text x="24" y="82" fill="#587069" font-size="13">property facts</text>
+              <text x="24" y="105" fill="#587069" font-size="13">images and status</text>
+            </g>
+            <g transform="translate(805 132)">
+              <rect width="150" height="160" rx="14" fill="#fff" stroke="#20866b" stroke-width="2"/>
+              <text x="24" y="44" fill="#155443" font-size="14" font-weight="700">USERS</text>
+              <text x="24" y="82" fill="#587069" font-size="13">accounts</text>
+              <text x="24" y="105" fill="#587069" font-size="13">permissions</text>
+            </g>
+            <g transform="translate(1045 132)">
+              <rect width="110" height="160" rx="14" fill="#c8983e"/>
+              <text x="18" y="44" fill="#fff" font-size="14" font-weight="700">INQUIRIES</text>
+              <text x="18" y="82" fill="#fff" font-size="13">review</text>
+              <text x="18" y="105" fill="#fff" font-size="13">follow-up</text>
+            </g>
+            <g>
+              <rect x="410" y="405" width="420" height="95" rx="14" fill="#d7e9e1"/>
+              <text x="620" y="444" fill="#155443" text-anchor="middle" font-size="16" font-weight="700">DATABASE + PUBLIC WEBSITE</text>
+              <text x="620" y="470" fill="#587069" text-anchor="middle" font-size="13">updates become searchable and visible to users</text>
+            </g>
+            <text x="620" y="358" fill="#587069" text-anchor="middle" font-size="14" font-weight="700">PUBLISH / REVIEW / UPDATE</text>
+          </g>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch green"></i> admin control path</span>
+        <span><i class="swatch soft"></i> managed records</span>
+        <span><i class="swatch gold"></i> customer inquiry attention</span>
+      </div>
+    </section>
+    <p class="note"><strong>Operational loop:</strong> records move from the admin panel into the database and back to the public site, while inquiries create the follow-up work for the office.</p>
+  </main>
+</body>
+</html>

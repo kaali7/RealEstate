@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 from realtors.models import Realtor
 # Create your models here.
 class Listing(models.Model):
@@ -24,6 +24,6 @@ class Listing(models.Model):
     photo_5 =models.ImageField(upload_to='photos/%Y/%m?%d/',blank=True)
     photo_6 =models.ImageField(upload_to='photos/%Y/%m?%d/',blank=True)
     is_Published=models.py=models.BooleanField(default=True)
-    list_data=models.DateTimeField(default=datetime.now,blank=True )
+    list_data=models.DateTimeField(default=timezone.now,blank=True )
     def _str_(self):
         return self.title

@@ -1,0 +1,210 @@
+TABLE OF CONTENTS
+
+Primary documentation: manish_doc.md
+Source reference: sample_doc.pdf
+
+1. INTRODUCTION.....................................................................................................................
+    1.1 Project Background
+    1.2 Problem Statement
+    1.3 Project Objectives
+    1.4 Scope of the System
+    1.5 Intended Users
+    1.6 Project Benefits
+
+2. SYSTEM STUDY....................................................................................................................
+    2.1 Existing Real-Estate Listing Process
+    2.2 Limitations of the Existing Process
+    2.3 Proposed GekayRealEstate System
+    2.4 Advantages of the Proposed System
+    2.5 Feasibility Study
+        2.5.1 Technical Feasibility
+        2.5.2 Operational Feasibility
+        2.5.3 Economic Feasibility
+
+3. REQUIREMENTS AND ANALYSIS.........................................................................................
+    3.1 Functional Requirements
+        3.1.1 Home Page and Featured Listings
+        3.1.2 Property Listing Management
+        3.1.3 Property Search and Filtering
+        3.1.4 Property Details and Gallery
+        3.1.5 Realtor Information
+        3.1.6 User Registration and Login
+        3.1.7 User Dashboard
+        3.1.8 Property Inquiry and Contact
+        3.1.9 Email Notification
+        3.1.10 Administration
+    3.2 Non-Functional Requirements
+    3.3 User Roles and Permissions
+    3.4 Software Requirements
+    3.5 Hardware Requirements
+    3.6 Use-Case Analysis
+    3.7 Data Flow Analysis
+
+4. TECHNOLOGY AND PROJECT ARCHITECTURE..............................................................
+    4.1 Python
+    4.2 Django Framework
+    4.3 SQLite Database
+    4.4 HTML Templates
+    4.5 Bootstrap, CSS, and JavaScript
+    4.6 Pillow and Media File Handling
+    4.7 Python-Dotenv and Environment Configuration
+    4.8 Gunicorn and Whitenoise
+    4.9 Project Directory Structure
+    4.10 Django MVT Architecture
+    4.11 URL Routing Architecture
+
+5. SYSTEM DESIGN...................................................................................................................
+    5.1 Application Modules
+        5.1.1 Pages Module
+        5.1.2 Listings Module
+        5.1.3 Realtors Module
+        5.1.4 Accounts Module
+        5.1.5 Contacts Module
+    5.2 Database Design
+        5.2.1 Realtor Entity
+        5.2.2 Listing Entity
+        5.2.3 Contact Entity
+        5.2.4 Django User Entity
+    5.3 Entity Relationships
+    5.4 User Interface Design
+    5.5 Navigation and Common Layout
+    5.6 Security and Access Control
+    5.7 Media and Static File Design
+
+6. IMPLEMENTATION................................................................................................................
+    6.1 Django Project Configuration
+    6.2 Home and About Pages
+    6.3 Listing Display and Pagination
+    6.4 Listing Detail View
+    6.5 Listing Search
+        6.5.1 Keyword Search
+        6.5.2 City and State Filtering
+        6.5.3 Bedroom Filtering
+        6.5.4 Price Filtering
+    6.6 Realtor Management
+    6.7 User Registration
+    6.8 User Login and Logout
+    6.9 Authenticated User Dashboard
+    6.10 Contact Inquiry Processing
+    6.11 Duplicate Inquiry Prevention
+    6.12 Email Notification Processing
+    6.13 Django Admin Configuration
+    6.14 Environment Variables and Configuration
+    6.15 Database Migrations
+
+7. TESTING...............................................................................................................................
+    7.1 Testing Strategy
+    7.2 Unit Testing
+    7.3 Authentication Test Cases
+    7.4 Listing Test Cases
+    7.5 Search and Filter Test Cases
+    7.6 Contact Inquiry Test Cases
+    7.7 Access Control Test Cases
+    7.8 Template and User Interface Testing
+    7.9 Database and Migration Testing
+    7.10 Test Results
+
+8. USER INTERFACE AND SYSTEM RESULTS......................................................................
+    8.1 Home Page
+    8.2 About Page and Realtor Profiles
+    8.3 Browse Listings Page
+    8.4 Search Results Page
+    8.5 Listing Details Page
+    8.6 Registration Page
+    8.7 Login Page
+    8.8 User Dashboard
+    8.9 Contact Inquiry Form
+    8.10 Django Administration Panel
+    8.11 Responsive Layout
+
+9. DEPLOYMENT AND MAINTENANCE....................................................................................
+    9.1 Local Windows Setup
+    9.2 Virtual Environment Setup
+    9.3 Dependency Installation
+    9.4 Environment File Configuration
+    9.5 Database Migration
+    9.6 Administrator Account Setup
+    9.7 Running the Development Server
+    9.8 Production Deployment Considerations
+    9.9 Backup and Maintenance
+
+10. CONCLUSION AND FUTURE SCOPE.................................................................................
+    10.1 Conclusion
+    10.2 Current System Limitations
+    10.3 Future Enhancements
+        10.3.1 Advanced User Roles
+        10.3.2 Online Booking and Payment
+        10.3.3 Saved and Favourite Listings
+        10.3.4 Advanced Property Search
+        10.3.5 Real-Time Notifications
+        10.3.6 Cloud Database and Hosting
+
+REFERENCES
+
+
+LIST OF TABLES
+
+Sr. No.   Table       Table Name / Description
+1         Table 3.1   Functional Requirements
+2         Table 3.2   Non-Functional Requirements
+3         Table 3.3   User Roles and Permissions
+4         Table 3.4   Software Requirements
+5         Table 3.5   Hardware Requirements
+6         Table 5.1   Application Modules
+7         Table 5.2   Realtor Entity Fields
+8         Table 5.3   Listing Entity Fields
+9         Table 5.4   Contact Entity Fields
+10        Table 5.5   URL Routes and Views
+11        Table 7.1   Authentication Test Cases
+12        Table 7.2   Listing and Search Test Cases
+13        Table 7.3   Contact Inquiry Test Cases
+14        Table 7.4   Integration Test Results
+15        Table 9.1   Deployment Configuration
+
+
+LIST OF FIGURES
+
+Sr. No.   Figure        Figure Name
+1         Figure 2.1    Existing and Proposed System Comparison [✓ PNG]
+2         Figure 3.1    Use-Case Diagram [✓ PNG]
+3         Figure 3.2    Data Flow Diagram [✓ PNG]
+4         Figure 4.1    Django MVT Architecture [✓ PNG]
+5         Figure 4.2    Project Directory Structure [NOT AVAILABLE]
+6         Figure 5.1    Application Module Diagram - System Architecture Flow [✓ PNG]
+7         Figure 5.2    Entity Relationship Diagram [✓ PNG]
+8         Figure 5.3    URL Routing Diagram [✓ PNG]
+9         Figure 5.4    User Navigation Flow - User Journey Flow [✓ PNG]
+10        Figure 6.1    Home Page [✓ SCREENSHOT]
+11        Figure 6.2    About Page [✓ SCREENSHOT]
+12        Figure 6.3    Browse Listings Page [✓ SCREENSHOT]
+13        Figure 6.4    Search Results Page [✓ SCREENSHOT]
+14        Figure 6.5    Listing Details Page [✓ SCREENSHOT]
+15        Figure 6.6    Registration Page [NOT AVAILABLE]
+16        Figure 6.7    Login Page [✓ SCREENSHOT]
+17        Figure 6.8    User Dashboard [✓ SCREENSHOT]
+18        Figure 6.9    Contact Inquiry Form [NOT AVAILABLE]
+19        Figure 6.10   Django Administration Panel - Admin Operations Flow [✓ PNG]
+
+IMAGE FILES
+
+Diagram images are stored in doc/img:
+✓ doc/img/figure-2-1-comparison.png
+✓ doc/img/figure-3-1-use-case.png
+✓ doc/img/figure-3-2-data-flow.png
+✓ doc/img/figure-4-1-mvt.png
+✓ doc/img/figure-5-2-er.png
+✓ doc/img/figure-5-3-routing.png
+✓ doc/img/flowchart-system.png
+✓ doc/img/flowchart-user.png
+✓ doc/img/flowchart-admin.png
+
+Website screenshots are stored in doc/img2:
+✓ doc/img2/figure-6-1-home-page.png
+✓ doc/img2/figure-6-2-about-page.png
+✓ doc/img2/figure-6-3-browse-listings.png
+✓ doc/img2/figure-6-4-search-results.png
+✓ doc/img2/figure-6-5-listing-details.png
+✓ doc/img2/figure-6-7-login.png
+✓ doc/img2/figure-6-8-user-dashboard.png
+
+The complete connected report is available in doc/manish_doc.md.
