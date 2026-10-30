@@ -1,97 +1,97 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
-        <div class="container">
-          <div class="row text-center">
-            <div class="col-md-12">
-              <h1 class="display-4">About  GekayRealEstate</h1>
-              <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
-            </div>
+<main class="page-shell">
+  <header class="page-intro">
+    <div class="container">
+      <p class="eyebrow">Our approach</p>
+      <h1>About Gekay Estates</h1>
+      <p>Independent real estate guidance and curated property discovery across Maharashtra.</p>
+    </div>
+  </header>
+
+  <div class="container mt-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section-block pt-4">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-story">
+          <p class="eyebrow">Our philosophy</p>
+          <h2>We search for the right home for you.</h2>
+          <p class="lead">Finding a home should feel clear, straightforward, and grounded in real details.</p>
+          <div class="about-photo mb-4">
+            <img src="{% static 'img/about.jpg' %}" alt="Architecture and living spaces" class="editorial-image">
           </div>
+          <p>Gekay Estates was founded on a simple principle: property discovery should be calm, transparent, and responsive. We curate verified residential listings throughout Maharashtra, providing accurate structural specifications, high-resolution visual previews, and direct access to dedicated local realtors.</p>
         </div>
-      </section>
-    
-      <!-- Breadcrumb -->
-      <section id="bc" class="mt-3">
-        <div class="container">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="{% url 'index' %}">
-                  <i class="fas fa-home"></i> Home</a>
-              </li>
-              <li class="breadcrumb-item active"> About</li>
-            </ol>
-          </nav>
-        </div>
-      </section>
-    
-      <section id="about" class="py-4">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
-              <h2>We Search For The Perfect Home</h2>
-              <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
-              <img src="{% static 'img/about.jpg' %}" alt="">
-              <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis esse officia repudiandae ad saepe ex, amet
-                neque quod accusamus rem quia magnam magni dolorum facilis ullam minima perferendis? Exercitationem at quaerat
-                commodi id libero eveniet harum perferendis laborum molestias quia.</p>
-            </div>
-            <div class="col-md-4">
-              {% if mvp_realtors %}
-                {% for realtor in mvp_realtors %}
-                <div class="card">
-                    <img class="card-img-top" src="{{ realtor.photo.url }}" alt="Seller of the month">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller Of The Month</h5>
-                      <h6 class="text-secondary">{{ realtor.name }}</h6>
-                      <p class="card-text">{{ realtor.description }}
-                      </p>
-                    </div>
-                  </div>
-                {% endfor %}
-              {% endif %}
-              
-            </div>
-          </div>
-        </div>
-      </section>
-    
-      <!-- Work -->
-      <section id="work" class="bg-dark text-white text-center">
-        <h2 class="display-4">We Work For You</h2>
-        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem velit aperiam, unde aliquid at similique!</h4>
-        <hr>
-        <a href="listings.html" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
-      </section>
-    
-      <!-- Team -->
-      <section id="team" class="py-5">
-        <div class="container">
-          <h2 class="text-center">Our Team</h2>
-          <div class="row text-center">
-            {% if realtors %}
-            {% for realtor in realtors %}
-              <div class="col-md-4">
-                  <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3">
-                  <h4>{{ realtor.name }}</h4>
-                  <p class="text-success">
-                    <i class="fas fa-award text-success mb-3"></i> Realtor</p>
-                  <hr>
-                  <p>
-                    <i class="fas fa-phone"></i>{{ realtor.phone }}</p>
-                  <p>
-                    <i class="fas fa-envelope-open"></i> {{realtor.email}}</p>
-                </div>
-            {% endfor %}
-            {% else %}
-              <div class="col-md-12">
-                 <p>No Realtors Available</p>
+        <div class="about-sidebar">
+          {% if mvp_realtors %}
+            {% for realtor in mvp_realtors %}
+            <div class="mvp-card">
+              <div class="mvp-badge"><i class="fas fa-star"></i> Seller of the Month</div>
+              <div class="mvp-avatar-wrap">
+                <img class="realtor-avatar" src="{{ realtor.photo.url }}" alt="{{ realtor.name }}">
               </div>
-            {% endif %}
-          </div>
+              <h3>{{ realtor.name }}</h3>
+              <p class="mvp-desc">{{ realtor.description }}</p>
+              <div class="realtor-contacts">
+                <a href="tel:{{ realtor.phone }}"><i class="fas fa-phone"></i> {{ realtor.phone }}</a>
+                <a href="mailto:{{ realtor.email }}"><i class="fas fa-envelope"></i> {{ realtor.email }}</a>
+              </div>
+            </div>
+            {% endfor %}
+          {% endif %}
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="cta-banner">
+    <div class="container text-center">
+      <p class="eyebrow" style="color: #6ba2ff;">Dedicated service</p>
+      <h2>We work for you</h2>
+      <p class="cta-lead">From preliminary search to the final handshake, our experienced realtors provide tailored guidance every step of the way.</p>
+      <a href="{% url 'listings' %}" class="btn btn-primary">View our featured listings</a>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="team-section">
+    <div class="container">
+      <div class="section-heading text-center" style="display: block; margin-bottom: 40px;">
+        <p class="eyebrow">Local specialists</p>
+        <h2>Our Team</h2>
+        <p style="margin: 8px auto 0; max-width: 48ch;">Meet our trusted group of certified professionals dedicated to Maharashtra real estate.</p>
+      </div>
+
+      <div class="team-grid">
+        {% if realtors %}
+          {% for realtor in realtors %}
+          <div class="team-card">
+            <img src="{{ realtor.photo.url }}" alt="{{ realtor.name }}" class="realtor-avatar">
+            <h4>{{ realtor.name }}</h4>
+            <p class="realtor-role"><i class="fas fa-award"></i> Realtor</p>
+            <div class="realtor-contacts">
+              <a href="tel:{{ realtor.phone }}"><i class="fas fa-phone"></i> {{ realtor.phone }}</a>
+              <a href="mailto:{{ realtor.email }}"><i class="fas fa-envelope"></i> {{ realtor.email }}</a>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-12 text-center">
+            <p>No realtors are currently available.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</main>
 {% endblock %}

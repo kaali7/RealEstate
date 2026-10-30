@@ -28,8 +28,10 @@
         <input class="form-control" type="text" name="keywords" placeholder="Keywords">
         <input class="form-control" type="text" name="city" placeholder="City">
         <select name="bedrooms" class="form-control">
-          <option value="">Bedrooms</option>
-          {% for key,value in bedroom_choices.items %}<option value="{{ key }}">{{ value }}</option>{% endfor %}
+          <option value="">Bedrooms (Any)</option>
+          {% for key,value in bedroom_choices.items %}
+            <option value="{{ key }}">{{ value }} Bedroom{{ value|pluralize }}</option>
+          {% endfor %}
         </select>
         <button class="btn btn-primary" type="submit">Search</button>
       </form>

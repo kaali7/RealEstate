@@ -1,68 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
+<main class="page-shell">
+  <header class="page-intro">
     <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-4">User Dashboard</h1>
-          <p class="lead">Manage your Gekay Real Estate account</p>
-        </div>
-      </div>
+      <p class="eyebrow">Account</p>
+      <h1>User Dashboard</h1>
+      <p>Manage your Gekay Real Estate account</p>
     </div>
-  </section>
+  </header>
 
-  <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb-item active"> Dashboard</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
+  <div class="container mt-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+
   <!--Alerts-->
   {% include 'partials/_alerts.html' %}
 
-  <section id="dashboard" class="py-4">
+  <section class="dashboard-shell">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Welcome {{ user.first_name }}</h2>
-          {% if contacts %}
-            <p>Here are the property listings that you have inquired about</p>
-            <table class="table">
+      <div class="dashboard-header">
+        <h2>Welcome {{ user.first_name|default:user.username }}</h2>
+        {% if contacts %}
+          <p>Here are the property listings that you have inquired about</p>
+        {% endif %}
+      </div>
+
+      {% if contacts %}
+        <div class="dashboard-card">
+          <div class="table-responsive">
+            <table class="dashboard-table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th scope="col" style="width: 90px;">#</th>
                   <th scope="col">Property</th>
-                  <th></th>
+                  <th scope="col" class="text-right" style="width: 170px;">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {% for contact in contacts %}
                 <tr>
-                  <td>{{ contact.id}}</td>
-                  <td>{{ contact.listing }}</td>
-                  <td>
-                    <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                  <td><span class="dashboard-badge">#{{ forloop.counter }}</span></td>
+                  <td><strong class="dashboard-property-title">{{ contact.listing }}</strong></td>
+                  <td class="text-right">
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'listing' contact.listing_id %}">View Listing</a>
                   </td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
-          {% else %}
-            <p>You have not made any inquiries</p>
-          {% endif %}    
-
+          </div>
         </div>
-      </div>
+      {% else %}
+        <div class="dashboard-empty">
+          <p>You have not made any property inquiries yet.</p>
+          <a class="btn btn-primary" href="{% url 'listings' %}">Browse homes</a>
+        </div>
+      {% endif %}
     </div>
   </section>
-
+</main>
 {% endblock %}
-

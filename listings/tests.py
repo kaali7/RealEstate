@@ -15,14 +15,16 @@ class ListingTests(TestCase):
         )
         cls.listing = Listing.objects.create(
             realtor=realtor,
-            title='Test Home',
+            title='Test Luxury Home',
             address='1 Test Street',
             city='Test City',
-            state='TS',
+            state='Maharashtra',
             zipcode='12345',
-            price=100000,
+            description='Includes a private swimming pool and modern garage amenities.',
+            price=10000000,
             bedrooms=3,
             bathrooms=2,
+            garage=2,
             sqft=1500,
             lot_size=2000,
             photo_main='photos/test.jpg',
@@ -43,6 +45,22 @@ class ListingTests(TestCase):
     def test_search_filters_by_city(self):
         response = self.client.get('/listings/search', {'city': 'Test City'})
 
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.listing.title)
+
+    def test_search_filters_by_keyword(self):
+        # Search by word in description
+        response = self.client.get('/listings/search', {'keywords': 'swimming pool'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.listing.title)
+
+        # Search by word in title
+        response2 = self.client.get('/listings/search', {'keywords': 'Luxury'})
+        self.assertEqual(response2.status_code, 200)
+        self.assertContains(response2, self.listing.title)
+
+    def test_search_filters_by_price(self):
+        response = self.client.get('/listings/search', {'price': '10000000'})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.listing.title)
 

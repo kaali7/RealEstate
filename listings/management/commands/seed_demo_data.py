@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 defaults={
                     'name': f'Demo Realtor {index}',
                     'photo': media_image_names[0],
-                    'description': 'Demo realtor for local testing.',
+                    'description': 'Certified real estate specialist with extensive regional expertise.',
                     'phone': f'+91-90000000{index:02d}',
                     'is_mvp': index <= 3,
                 },
@@ -65,41 +65,68 @@ class Command(BaseCommand):
             realtors.append(realtor)
 
         created = 0
+        cities = ['Mumbai', 'Pune', 'Thane', 'Nashik']
+        types = ['1 BHK Apartment', '2 BHK Modern Home', '3 BHK Luxury Flat', '4 BHK Penthouse', '5 BHK Luxury Villa']
+
         for index in range(1, count + 1):
+            city_name = cities[index % len(cities)]
+            # Distribute bedrooms cleanly from 1 to 5 so every bedroom filter works
+            bedroom_count = 1 + (index % 5)
+            prop_type = types[(bedroom_count - 1) % len(types)]
+            garage_count = index % 3
+
+            amenities = []
+            if index % 2 == 0:
+                amenities.append('private swimming pool')
+            if garage_count > 0:
+                amenities.append(f'{garage_count}-car covered garage')
+            if index % 3 == 0:
+                amenities.append('spacious sunlit balcony')
+            if index % 4 == 0:
+                amenities.append('landscaped private garden')
+            if index % 5 == 0:
+                amenities.append('rooftop terrace with panoramic skyline views')
+
+            amenities_text = ', '.join(amenities) if amenities else 'open modular kitchen, premium fixtures'
+            desc = (
+                f'{prop_type} located in a prime neighborhood of {city_name}. '
+                f'Features include {amenities_text}, premium architectural finishes, '
+                f'and immediate access to local transit and shopping.'
+            )
+
             listing, was_created = Listing.objects.get_or_create(
                 title=f'Demo Property {index:03d}',
                 defaults={
                     'realtor': realtors[(index - 1) % len(realtors)],
                     'address': f'{index} Demo Avenue',
-                    'city': ['Mumbai', 'Pune', 'Thane', 'Nashik'][index % 4],
+                    'city': city_name,
                     'state': 'Maharashtra',
                     'zipcode': f'{400000 + index}',
-                    'description': (
-                        'A comfortable demo property for testing search, '
-                        'pagination, and inquiry workflows.'
-                    ),
+                    'description': desc,
                     'price': 5000000 + (index * 125000),
-                    'bedrooms': 2 + (index % 4),
-                    'bathrooms': 1.5 + (index % 3) * 0.5,
-                    'garage': index % 3,
-                    'sqft': 900 + (index * 25),
-                    'lot_size': 1200 + (index * 10),
+                    'bedrooms': bedroom_count,
+                    'bathrooms': 1.0 + (bedroom_count - 1) * 0.5,
+                    'garage': garage_count,
+                    'sqft': 550 + (bedroom_count * 250) + (index * 15),
+                    'lot_size': 800 + (bedroom_count * 300) + (index * 10),
                     'photo_main': media_image_names[(index - 1) % len(media_image_names)],
                     'is_Published': True,
                 },
             )
             if not was_created:
+                listing.description = desc
+                listing.bedrooms = bedroom_count
+                listing.bathrooms = 1.0 + (bedroom_count - 1) * 0.5
+                listing.sqft = 550 + (bedroom_count * 250) + (index * 15)
                 listing.photo_main = media_image_names[
                     (index - 1) % len(media_image_names)
                 ]
                 listing.is_Published = True
-                listing.save(update_fields=['photo_main', 'is_Published'])
+                listing.save(update_fields=['description', 'bedrooms', 'bathrooms', 'sqft', 'photo_main', 'is_Published'])
             created += int(was_created)
 
         self.stdout.write(
             self.style.SUCCESS(
-                f'Demo data ready: {Realtor.objects.count()} realtors, '
-                f'{Listing.objects.count()} listings '
-                f'({created} new listings).'
+                f'Successfully seeded {count} demo listings ({created} newly created).'
             )
         )
